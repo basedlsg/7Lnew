@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.env
+.venv
+venv/
+
+# PyBullet outputs
+*.png
+*.mp4
+*.npz
+*.npy
+outputs/
+
+# Editor
+.idea/
+.vscode/
+.DS_Store
+
+# Secrets
+.env.local
+.env.production
+*.secret
+
+# Data artifacts
+/data/
+/tmp/
+
+# Logs
+*.log
+logs/
+
+# Coverage
+htmlcov/
+.coverage*
+
+# Node/Frontend
+node_modules/

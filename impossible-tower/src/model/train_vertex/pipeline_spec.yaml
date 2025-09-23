@@ -1,0 +1,27 @@
+# Vertex AI CustomJob specification for LoRA fine-tuning.
+# Replace placeholder values in docs/secrets.md before submission.
+
+workerPoolSpecs:
+  - machineSpec:
+      machineType: n1-standard-8
+      acceleratorType: NVIDIA_TESLA_T4
+      acceleratorCount: 1
+    replicaCount: 1
+    containerSpec:
+      imageUri: gcr.io/<PROJECT_ID>/impossible-tower-trainer:latest
+      command:
+        - python
+        - src/model/train_vertex/trainer.py
+      args:
+        - --train-data
+        - gs://<BUCKET>/datasets/itower/train
+        - --eval-data
+        - gs://<BUCKET>/datasets/itower/val
+        - --output-dir
+        - gs://<BUCKET>/models/itower
+        - --model-name
+        - paligemma
+        - --lora-rank
+        - "16"
+        - --epochs
+        - "3"

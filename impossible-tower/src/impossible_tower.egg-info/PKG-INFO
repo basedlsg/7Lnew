@@ -1,0 +1,61 @@
+Metadata-Version: 2.4
+Name: impossible-tower
+Version: 0.1.0
+Summary: Detect physically impossible scenes with symbolic proofs.
+Author: Impossible Tower Contributors
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi>=0.110
+Requires-Dist: uvicorn[standard]>=0.27
+Requires-Dist: pydantic>=2.6
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: requests>=2.31
+Requires-Dist: httpx>=0.26
+Requires-Dist: numpy>=1.26
+Requires-Dist: scipy>=1.11
+Requires-Dist: pybullet>=3.2.5
+Requires-Dist: Pillow>=10.2
+Requires-Dist: z3-solver>=4.12
+Requires-Dist: typer>=0.9
+Requires-Dist: rich>=13.7
+Requires-Dist: google-cloud-aiplatform>=1.39
+Requires-Dist: google-cloud-storage>=2.14
+Requires-Dist: opentelemetry-api>=1.23
+Requires-Dist: opentelemetry-sdk>=1.23
+Requires-Dist: structlog>=24.1
+Requires-Dist: jinja2>=3.1
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23; extra == "dev"
+Requires-Dist: pytest-cov>=4.1; extra == "dev"
+Requires-Dist: mypy>=1.8; extra == "dev"
+Requires-Dist: ruff>=0.1.14; extra == "dev"
+Requires-Dist: pre-commit>=3.6; extra == "dev"
+Requires-Dist: types-requests; extra == "dev"
+Requires-Dist: types-PyYAML; extra == "dev"
+Requires-Dist: pytest-mock>=3.12; extra == "dev"
+Dynamic: license-file
+
+# Impossible Tower
+
+Impossible Tower is a reproducible research stack for detecting physically impossible scenes and producing symbolic proofs of the violations. The project combines synthetic data generation (PyBullet), a Vertex AI accessible multimodal model that emits structured reasoning programs, and a Z3-based checker that validates the generated proofs. A FastAPI demo service orchestrates the workflow and exposes a lightweight UI.
+
+## Project status
+
+This repository is under active scaffolding. Major components, including the data generator, model training harness, verification service, demo API, CI, and documentation, are being brought up incrementally. See the open tracking issue for milestone progress once created.
+
+## Getting started
+
+1. Clone the repository and install the project dependencies (instructions in `docs/getting-started.md`).
+2. Generate a small synthetic dataset with `scripts/synth_100.sh` to sanity check the stack.
+3. Deploy the checker and demo services (see `docs/api.md` and `infra/gcp/*`).
+
+## Contributing
+
+We welcome contributions via pull requests. Please follow the coding standards enforced by pre-commit and ensure that unit tests and type checks pass locally before opening a PR.
+
+## License
+
+This project is released under the MIT License. See `LICENSE` for details.

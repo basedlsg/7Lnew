@@ -1,0 +1,5 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "Dockerfile.checker", "-t", "gcr.io/$PROJECT_ID/impossible-tower-checker:latest", "."]
+images:
+  - gcr.io/$PROJECT_ID/impossible-tower-checker:latest

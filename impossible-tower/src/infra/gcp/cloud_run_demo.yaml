@@ -1,0 +1,20 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: impossible-tower-demo
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/$PROJECT_ID/impossible-tower-demo:latest
+          env:
+            - name: CHECKER_SERVICE_URL
+              value: https://impossible-tower-checker-<hash>-uc.a.run.app/check
+            - name: VERTEX_ENDPOINT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vertex-endpoint-url
+                  key: url
+          ports:
+            - containerPort: 8080
+      containerConcurrency: 4

@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: impossible-tower-checker
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/$PROJECT_ID/impossible-tower-checker:latest
+          env:
+            - name: LOG_LEVEL
+              value: INFO
+          ports:
+            - containerPort: 8080
+      containerConcurrency: 4

@@ -1,0 +1,10 @@
+flowchart TD
+  A[PyBullet Data Gen] -->|scenes| B[GCS Bucket]
+  B --> C[Vertex Training Pipeline]
+  C --> D[Vertex Endpoint]
+  D -->|program JSON| E[Checker Service (Z3)]
+  E --> F[Demo API]
+  F --> G[Web UI]
+  F --> H[Eval Harness]
+  B --> H
+  B --> I[Offline Analysis]

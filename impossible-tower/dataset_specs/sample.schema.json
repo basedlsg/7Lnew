@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Impossible Tower Sample",
+  "type": "object",
+  "required": ["images", "scene_graph", "constraints", "label"],
+  "properties": {
+    "images": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "scene_graph": {
+      "$ref": "scene_graph.schema.json"
+    },
+    "constraints": {
+      "$ref": "proof.schema.json"
+    },
+    "label": {
+      "type": "object",
+      "required": ["possible"],
+      "properties": {
+        "possible": {"type": "boolean"}
+      }
+    }
+  }
+}

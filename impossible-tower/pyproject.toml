@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "impossible-tower"
+version = "0.1.0"
+description = "Detect physically impossible scenes with symbolic proofs."
+readme = "README.md"
+authors = [{name = "Impossible Tower Contributors"}]
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+  "pydantic>=2.6",
+  "python-dotenv>=1.0",
+  "requests>=2.31",
+  "httpx>=0.26",
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "pybullet>=3.2.5",
+  "Pillow>=10.2",
+  "z3-solver>=4.12",
+  "typer>=0.9",
+  "rich>=13.7",
+  "google-cloud-aiplatform>=1.39",
+  "google-cloud-storage>=2.14",
+  "opentelemetry-api>=1.23",
+  "opentelemetry-sdk>=1.23",
+  "structlog>=24.1",
+  "jinja2>=3.1"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "pytest-asyncio>=0.23",
+  "pytest-cov>=4.1",
+  "mypy>=1.8",
+  "ruff>=0.1.14",
+  "pre-commit>=3.6",
+  "types-requests",
+  "types-PyYAML",
+  "pytest-mock>=3.12"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-ra --strict-markers"
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+check_untyped_defs = true
+strict_optional = true
+warn_return_any = true
+warn_unused_ignores = true
+packages = ["src"]
+
+[tool.isort]
+profile = "black"
+known_first_party = ["impossible_tower"]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 100

@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scene Graph",
+  "type": "object",
+  "required": ["objects", "contacts", "adjacency"],
+  "properties": {
+    "seed": {"type": "integer"},
+    "stable": {"type": "boolean"},
+    "gravity": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "mass", "half_extents", "position", "orientation_quat"],
+        "properties": {
+          "name": {"type": "string"},
+          "mass": {"type": "number"},
+          "half_extents": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "position": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "orientation_quat": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "support_polygon_xy": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {"type": "number"},
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        }
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["body_a", "body_b"],
+        "properties": {
+          "body_a": {"type": "string"},
+          "body_b": {"type": "string"},
+          "normal": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 3,
+            "maxItems": 3
+          }
+        }
+      }
+    },
+    "adjacency": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {"type": "string"}
+      }
+    }
+  }
+}

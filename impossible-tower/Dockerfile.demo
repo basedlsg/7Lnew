@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential git && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml README.md ./
+COPY src ./src
+COPY docs ./docs
+COPY dataset_specs ./dataset_specs
+
+RUN pip install --upgrade pip && \
+    pip install .
+
+EXPOSE 8080
+
+ENV CHECKER_SERVICE_URL=http://localhost:8081/check
+
+CMD ["uvicorn", "src.demo.app:app", "--host", "0.0.0.0", "--port", "8080"]

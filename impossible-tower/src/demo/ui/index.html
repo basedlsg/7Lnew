@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Impossible Tower Demo</title>
+    <style>
+      body { font-family: sans-serif; margin: 2rem; }
+      textarea { width: 400px; height: 80px; }
+      pre { background: #f3f3f3; padding: 1rem; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Impossible Tower</h1>
+    <p>Paste GCS image URIs (comma separated) and optional scene graph to analyze a scene.</p>
+    <label for="images">Images</label>
+    <textarea id="images" placeholder="gs://bucket/scene/cam_00.png"></textarea>
+    <br />
+    <button id="run">Analyze</button>
+    <pre id="result">Waiting...</pre>
+    <script>
+      async function analyze() {
+        const images = document.getElementById("images").value.split(",").map(v => v.trim()).filter(Boolean);
+        const payload = { images };
+        const response = await fetch("/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+      }
+      document.getElementById("run").addEventListener("click", analyze);
+    </script>
+  </body>
+</html>
