@@ -1,0 +1,11 @@
+steps:
+- name: gcr.io/cloud-builders/gcloud
+  args: ["artifacts","repositories","create","itower","--repository-format","DOCKER","--location","$LOCATION"]
+- name: gcr.io/cloud-builders/gcloud
+  args: ["builds","submit","services/scene-service","--config","services/scene-service/cloudbuild.yaml"]
+- name: gcr.io/cloud-builders/gcloud
+  args: ["builds","submit","services/vertex-proxy","--config","services/vertex-proxy/cloudbuild.yaml"]
+- name: gcr.io/cloud-builders/gcloud
+  args: ["builds","submit","services/z3-checker","--config","services/z3-checker/cloudbuild.yaml"]
+- name: gcr.io/cloud-builders/gcloud
+  args: ["builds","submit","services/itower-runner","--config","services/itower-runner/cloudbuild.yaml"]

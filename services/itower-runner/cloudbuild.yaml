@@ -1,0 +1,10 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  args: ["build","-t","$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/itower-runner:$COMMIT_SHA","."]
+- name: gcr.io/cloud-builders/docker
+  args: ["push","$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/itower-runner:$COMMIT_SHA"]
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args: ["run","deploy","itower-runner","--image=$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/itower-runner:$COMMIT_SHA","--region=$LOCATION","--platform=managed","--allow-unauthenticated","--port=8080","--set-env-vars","SCENE_SERVICE_URL=$(gcloud run services describe scene-service --region=$LOCATION --format='value(status.url)')","--set-env-vars","VERTEX_PROXY_URL=$(gcloud run services describe vertex-proxy --region=$LOCATION --format='value(status.url)')","--set-env-vars","Z3_CHECKER_URL=$(gcloud run services describe z3-checker --region=$LOCATION --format='value(status.url)')"]
+images:
+- "$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/itower-runner:$COMMIT_SHA"

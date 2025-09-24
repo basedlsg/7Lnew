@@ -1,0 +1,9 @@
+{
+  "assumptions": [
+    "contact(block_1,block_0)",
+    "support(block_1,block_0)",
+    "com_within_support(block_1)"
+  ],
+  "claims": ["stable(scene)"],
+  "view_refs": ["gs://example/cam_00.png"]
+}

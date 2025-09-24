@@ -1,0 +1,9 @@
+{
+  "assumptions": [
+    "contact(block_1,block_0)",
+    "no_support(block_1,block_0)",
+    "com_outside_support(block_1)"
+  ],
+  "claims": ["unstable(scene)"],
+  "view_refs": ["gs://example/cam_00.png"]
+}

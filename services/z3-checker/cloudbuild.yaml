@@ -1,0 +1,10 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  args: ["build","-t","$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/z3-checker:$COMMIT_SHA","."]
+- name: gcr.io/cloud-builders/docker
+  args: ["push","$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/z3-checker:$COMMIT_SHA"]
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args: ["run","deploy","z3-checker","--image=$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/z3-checker:$COMMIT_SHA","--region=$LOCATION","--platform=managed","--allow-unauthenticated","--port=8080"]
+images:
+- "$LOCATION-docker.pkg.dev/$PROJECT_ID/itower/z3-checker:$COMMIT_SHA"
